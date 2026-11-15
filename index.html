@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CareCircle demo: an accessible shared elderly-care organiser.">
+  <title>CareCircle — Care, connected</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="CareCircle home"><span class="brandmark">✚</span> CareCircle</a>
+    <span class="demo-tag">HACKATHON DEMO</span>
+    <button id="resetDemo" class="quiet-button" type="button">Reset demo</button>
+  </header>
+
+  <main class="shell">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">SHARED CARE, MORE PEACE OF MIND</p>
+        <h1>Good afternoon, Mary <span aria-hidden="true">☀️</span></h1>
+        <p class="muted">Your care plan, appointments and trusted circle — all in one place.</p>
+      </div>
+      <div class="profile-pill"><span class="avatar">M</span><span><b>Mary Johnson</b><small>Care profile · Demo data</small></span></div>
+    </section>
+
+    <section class="notice" aria-label="Demo safety notice">
+      <b>Demo mode:</b> This prototype uses sample data stored in this browser. Passcodes and reminders are simulated; do not enter real medical information.
+    </section>
+
+    <nav class="tabs" aria-label="Main sections">
+      <button class="tab active" data-tab="overview" type="button">Overview</button>
+      <button class="tab" data-tab="medicines" type="button">Medications</button>
+      <button class="tab" data-tab="appointments" type="button">Appointments</button>
+      <button class="tab" data-tab="circle" type="button">Care circle</button>
+    </nav>
+
+    <section id="overview" class="panel">
+      <div class="section-heading"><div><p class="eyebrow">YOUR DAILY SNAPSHOT</p><h2>Today at a glance</h2></div><span class="date-chip" id="todayLabel"></span></div>
+      <div class="stats">
+        <article class="stat-card"><span class="stat-icon lavender">▦</span><p>Scheduled today</p><strong id="scheduledCount">3</strong></article>
+        <article class="stat-card"><span class="stat-icon mint">✓</span><p>Marked taken</p><strong id="takenCount">1</strong></article>
+        <article class="stat-card"><span class="stat-icon peach">◷</span><p>Upcoming visits</p><strong id="visitCount">1</strong></article>
+      </div>
+      <div class="content-grid">
+        <article class="card"><div class="card-head"><div><p class="eyebrow">NEXT ON YOUR PLAN</p><h3>Medication schedule</h3></div><button class="text-button" data-go="medicines" type="button">View all →</button></div><div id="todayMeds" class="stack"></div></article>
+        <article class="card"><div class="card-head"><div><p class="eyebrow">COMING UP</p><h3>Next appointment</h3></div><span class="mini-icon">♡</span></div><div id="nextAppointment"></div></article>
+      </div>
+    </section>
+
+    <section id="medicines" class="panel hidden">
+      <div class="section-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Medications</h2><p class="muted">Only follow the schedule provided by your healthcare professional.</p></div><button id="addMedicine" class="primary" type="button">＋ Add medication</button></div>
+      <div id="medicineList" class="stack"></div>
+      <form id="medicineForm" class="card form-card hidden">
+        <h3>Add a medication</h3>
+        <label>Medicine name<input id="medName" required maxlength="60" placeholder="e.g. Vitamin tablet"></label>
+        <div class="form-row"><label>Instructions<input id="medDose" required maxlength="80" placeholder="e.g. As prescribed"></label><label>Time<input id="medTime" type="time" required value="09:00"></label></div>
+        <div class="form-actions"><button class="quiet-button" id="cancelMed" type="button">Cancel</button><button class="primary" type="submit">Save medication</button></div>
+      </form>
+    </section>
+
+    <section id="appointments" class="panel hidden">
+      <div class="section-heading"><div><p class="eyebrow">PLAN AHEAD</p><h2>Appointments</h2><p class="muted">Keep trusted members informed about upcoming visits.</p></div><button id="addAppointment" class="primary" type="button">＋ Add appointment</button></div>
+      <div id="appointmentList" class="stack"></div>
+      <form id="appointmentForm" class="card form-card hidden">
+        <h3>Add an appointment</h3>
+        <label>Doctor / clinic<input id="doctorName" required maxlength="80" placeholder="e.g. Dr. Rao — Clinic"></label>
+        <div class="form-row"><label>Date<input id="visitDate" type="date" required></label><label>Time<input id="visitTime" type="time" required value="10:00"></label></div>
+        <label>Notes (optional)<input id="visitNotes" maxlength="120" placeholder="e.g. Bring appointment card"></label>
+        <div class="form-actions"><button class="quiet-button" id="cancelVisit" type="button">Cancel</button><button class="primary" type="submit">Save appointment</button></div>
+      </form>
+    </section>
+
+    <section id="circle" class="panel hidden">
+      <div class="section-heading"><div><p class="eyebrow">TRUSTED SUPPORT</p><h2>My care circle</h2><p class="muted">People Mary has chosen to involve in her care.</p></div></div>
+      <div class="content-grid">
+        <article class="card member"><span class="avatar">M</span><div><b>Mary Johnson</b><p>Profile owner · Full control</p></div><span class="status">You</span></article>
+        <article class="card member"><span class="avatar lavender-bg">A</span><div><b>Anita Johnson</b><p>Daughter · Family viewer</p></div><span class="status">Invited</span></article>
+        <article class="card member"><span class="avatar peach-bg">R</span><div><b>Ravi Kumar</b><p>Home caretaker · Care support</p></div><span class="status">Invited</span></article>
+      </div>
+      <article class="card access-card"><h3>Demo access preview</h3><p>Choose a sample role to preview the shared experience. This is not real authentication.</p><label for="roleSelect">Preview role</label><select id="roleSelect"><option>Profile owner</option><option>Family viewer</option><option>Caretaker</option></select><p id="roleMessage" class="role-message" aria-live="polite">As profile owner, you can manage this demo care plan.</p></article>
+    </section>
+
+    <footer><span>CareCircle · Care that connects</span><span>Built as an educational hackathon prototype</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
